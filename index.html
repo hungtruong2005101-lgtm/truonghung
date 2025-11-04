@@ -1,0 +1,480 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-MEN FASHION - Thời Trang Dị Nhân</title>
+    <!-- Tải Tailwind CSS để có các tiện ích hiện đại -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tải Font Inter để có typography rõ ràng -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Cấu hình cơ bản */
+        /*css*/
+        :root {
+            --color-primary-yellow: #FFD700; /* Vàng X-Men */
+            --color-secondary-blue: #1A237E; /* Xanh Navy đậm */
+            --color-text-light: #F4F4F4;
+            --color-background-dark: #121212;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-background-dark);
+            color: var(--color-text-light);
+            line-height: 1.6;
+            margin: 0;
+            padding-top: 60px; /* Đảm bảo nội dung không bị che bởi nav cố định */
+        }
+
+        /* ---------------------- NAVIGATION (MENU) ---------------------- */
+        nav {
+            background-color: var(--color-background-dark);
+            border-bottom: 2px solid var(--color-primary-yellow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Cho phép xuống dòng trên mobile */
+        }
+
+        nav > ul > li {
+            position: relative;
+            margin: 0 15px;
+        }
+
+        nav a {
+            display: block;
+            padding: 18px 15px;
+            text-decoration: none;
+            color: var(--color-text-light);
+            font-weight: 600;
+            transition: color 0.3s, background-color 0.3s;
+            text-transform: uppercase;
+        }
+
+        nav a:hover {
+            color: var(--color-secondary-blue);
+            background-color: var(--color-primary-yellow);
+        }
+
+        /* Submenu styling */
+        nav ul ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 250px;
+            background-color: #222;
+            border: 1px solid var(--color-primary-yellow);
+            flex-direction: column;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            z-index: 20;
+            padding: 5px 0;
+        }
+
+        nav ul ul li {
+            margin: 0;
+        }
+        
+        nav ul ul li a {
+            padding: 10px 15px;
+            font-weight: 400;
+            text-transform: none;
+            color: var(--color-text-light);
+        }
+
+        nav > ul > li:hover > ul {
+            display: flex;
+        }
+
+        /* Sub-Submenu styling (Level 3) */
+        nav ul ul ul {
+            left: 100%;
+            top: 0;
+        }
+        
+        nav ul ul li:hover > ul {
+            display: flex;
+        }
+
+        /* ---------------------- MAIN CONTENT & CONTAINER ---------------------- */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 20px 20px;
+        }
+        
+        /* ---------------------- HERO SECTION ---------------------- */
+        .hero {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background-color: var(--color-secondary-blue);
+            border-radius: 10px;
+            margin-bottom: 40px;
+            padding: 40px;
+            gap: 40px;
+            min-height: 400px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(0, 127, 255, 0.1) 100%);
+        }
+
+        .hero-card {
+            flex: 1;
+            z-index: 1;
+        }
+
+        .hero-card span {
+            color: var(--color-primary-yellow);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .hero-card h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin: 0 0 15px 0;
+            color: var(--color-text-light);
+        }
+
+        .hero-card p {
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+            color: #C0C0C0;
+        }
+
+        .cta {
+            background-color: var(--color-primary-yellow);
+            color: var(--color-secondary-blue);
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 800;
+            transition: background-color 0.3s, transform 0.2s;
+            display: inline-block;
+        }
+
+        .cta:hover {
+            background-color: #f7e07c;
+            transform: scale(1.05);
+        }
+
+        .hero-visual {
+            flex: 1;
+            text-align: right;
+            z-index: 1;
+        }
+        
+        /* Placeholder for visual */
+        .mock {
+            /* Mô phỏng một hình ảnh nổi bật */
+            background-color: #333;
+            width: 100%;
+            height: 300px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--color-primary-yellow);
+            font-weight: 700;
+            border: 3px dashed var(--color-primary-yellow);
+            overflow: hidden; /* Dùng để ẩn ảnh laptop trong code gốc */
+        }
+        .mock img {
+            display: none; /* Ẩn ảnh laptop gốc, dùng placeholder text thay thế */
+        }
+        
+        /* ---------------------- PRODUCT GRID ---------------------- */
+        .section h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--color-primary-yellow);
+            border-left: 5px solid var(--color-primary-yellow);
+            padding-left: 15px;
+            margin-bottom: 30px;
+            margin-top: 50px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.2);
+            border: 1px solid var(--color-primary-yellow);
+        }
+
+        .thumb {
+            background-color: #2a2a2a;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.2; /* Làm mờ ảnh laptop gốc để phù hợp theme */
+            transition: opacity 0.3s;
+        }
+
+        .card:hover .thumb img {
+            opacity: 0.4;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card-body h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-top: 10px;
+            color: var(--color-text-light);
+        }
+
+        .meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--color-primary-yellow);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px;
+            }
+            .hero-card h2 {
+                font-size: 2.5rem;
+            }
+            .hero-visual {
+                text-align: center;
+                margin-top: 20px;
+            }
+            .nav ul {
+                justify-content: flex-start;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu điều hướng X-MEN -->
+    <nav>
+        <ul>
+            <li><a href="#">Trang Chủ</a></li>
+            <li><a href="#">Sản Phẩm</a>
+            <ul>
+                <!-- Đổi từ Laptop sang Thời trang -->
+                <li><a href="">Áo Thun & Áo Sơ Mi</a></li>
+                <li><a href="">Hoodie & Áo Khoác Dị Nhân</a></li>
+                <li><a href="">Phụ Kiện X-Men (Mũ, Ba Lô)</a> </li>
+            </ul></li>
+            <li><a href="#">Thương Hiệu</a>
+            <ul>
+                <!-- Đổi từ hãng Laptop sang Bộ sưu tập nhân vật -->
+                <li><a href="">CYCLOPS - Bộ Giáp Năng Lượng</a>
+                <ul>
+                    <li><a href="">Áo Thun Scott Summers</a></li>
+                    <li><a href="">Kính Tông Cyclops Cosplay</a></li>
+                    <li><a href="">Giày Thể Thao Dòng Visor</a></li>
+                </ul></li>
+                <li><a href="">WOLVERINE - Sức Mạnh Hoang Dã</a>
+                <ul>
+                    <li><a href="">Áo Khoác Da Logan</a></li>
+                    <li><a href="">Áo Hoodie Móng Vuốt Adamantium</a></li>
+                    <li><a href="">Quần Jeans Rách Phong Cách Dị Nhân</a></li>
+                </ul></li>
+                <li><a href="">JEAN GREY - Phoenix Collection</a>
+                <ul>
+                    <li><a href="">Váy Đỏ Phoenix</a></li>
+                    <li><a href="">Áo Khoác Dị Nhân Nữ</a></li>
+                    <li><a href="">Phụ Kiện Telekinesis</a></li>
+                </ul></li>
+                <li><a href="">STORM - Thiết Kế Phong Cách Khí Tượng</a>
+                <ul>
+                    <li><a href="">Áo Choàng Trắng Ororo</a></li>
+                    <li><a href="">Trang Sức Lôi Điện</a></li>
+                </ul></li>
+                <li><a href="">PROFESSOR X - Đồ Văn Phòng Cao Cấp</a>
+                <ul>
+                    <li><a href="">Áo Vest Charles Xavier</a></li>
+                    <li><a href="">Phụ Kiện Headset Cerebro</a></li>
+                </ul></li>
+            </ul></li>
+            <li><a href="" >Tin Tức</a>
+            <ul>
+                <Li><a href="#" target="_blank">Tin Tức Dị Nhân</a></Li>
+                <Li><a href="">Thời Trang Mutant Thế Giới</a></Li>
+            </ul></li>
+            <li><a href="#">Liên Hệ</a></li>
+        </ul>
+        
+    </nav>
+    <main class="container">
+        <!-- HERO SECTION (Banner chính) -->
+        <section class="hero">
+            <div class="hero-card">
+                <span>NEW ARRIVAL - BỘ SƯU TẬP TÁI SINH PHOENIX</span>
+                <h2>Sức Mạnh Thời Trang Dị Nhân.</h2>
+                <p>Khám phá phong cách của những Dị Nhân mạnh mẽ nhất. Độc đáo & Cấu hình chất lượng cao.</p>
+                <a href="#sanpham" class="cta">Xem Sản Phẩm Ngay</a>
+            </div>
+            <div class="hero-visual">
+                <!-- Placeholder for X-Men Visual -->
+                <div class="mock">X-MEN FASHION</div>
+            </div>
+            
+        </section>
+
+        <!-- SẢN PHẨM NỔI BẬT -->
+        <section class="section">
+            <h3 id="sanpham">Sản Phẩm Nổi Bật</h3>
+            <div class="grid">
+                <!--sản phẩm thứ nhất - Áo ROG (Đã đổi tên) -->
+                <article class="card" aria-labelledby="p1-title">
+                    <div class="thumb">
+                        <!-- Sử dụng placeholder cho ảnh, ẩn ảnh gốc -->
+                        <img src="z7188388635466_0b4d6e2c1ecaeaefbd359627a15d120e.jpg" alt="Áo Thun Wolverine Adamantium" width="250px">
+                    </div>
+                    <div class="card-body">
+                        <p class="meta">
+                            <span>Mã: WLVN001</span>
+                            <span class="price"> đ 650.000 VNĐ</span>
+                            <h4 class="title" id="p1-title">Áo Khoác Da Cao Cấp Wolverine</h4>
+                        </p>
+                    </div>
+                </article>
+
+                <!-- sản phẩm thứ hai - Áo Strix SCAR (Đã đổi tên) -->
+                <article class="card" aria-labelledby="p2-title">
+                    <div class="thumb">
+                        <img src="z7188388041269_32b7e44ea22260d3ed896ed44a143a80.jpg" alt="Áo Thun Cyclops Visor" width="250px">
+                    </div>
+                    <div class="card-body">
+                        <p class="meta">
+                            <span>Mã: CYCLOPS02</span>
+                            <span class="price"> đ 499.000 VNĐ</span>
+                            <h4 class="title" id="p2-title">Áo Thun Cyclops Visor</h4>
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Thêm sản phẩm thứ ba -->
+                <article class="card" aria-labelledby="p3-title">
+                    <div class="thumb">
+                        <img src="z7188389872302_712a65195287c4a4e16947eb01742265.jpg" alt="Giày Storm" width="250px">
+                    </div>
+                    <div class="card-body">
+                        <p class="meta">
+                            <span>Mã: STORM03</span>
+                            <span class="price"> đ 1.250.000 VNĐ</span>
+                            <h4 class="title" id="p3-title">Giày Sneaker Storm Cổ Cao</h4>
+                        </p>
+                    </div>
+                </article>
+                
+                <!-- Thêm sản phẩm thứ tư -->
+                <article class="card" aria-labelledby="p4-title">
+                    <div class="thumb">
+                        <img src="z7188387345059_d73e9c8afab23c02893b81ca4e91bd2f.jpg"  alt="Hoodie Jean Grey" width="250px">
+                    </div>
+                    <div class="card-body">
+                        <p class="meta">
+                            <span>Mã: JEAN004</span>
+                            <span class="price"> đ 790.000 VNĐ</span>
+                            <h4 class="title" id="p4-title">Hoodie Phoenix Jean Grey</h4>
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-800 text-gray-400 py-10 mt-10">
+        <div class="container flex flex-wrap justify-between gap-8">
+            <div class="w-full md:w-1/4">
+                <h4 class="text-xl font-bold mb-4 text-white border-b-2 border-yellow-500 pb-1">X-MEN FASHION</h4>
+                <p>Nơi sức mạnh dị nhân gặp gỡ phong cách thời trang đường phố.</p>
+            </div>
+            
+            <div class="w-1/2 md:w-1/4">
+                <h4 class="text-xl font-bold mb-4 text-white">Chính Sách</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-yellow-500 transition">Chính sách Đổi Trả</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition">Chính sách Giao Hàng</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition">Điều khoản Sử dụng</a></li>
+                </ul>
+            </div>
+
+            <div class="w-1/2 md:w-1/4">
+                <h4 class="text-xl font-bold mb-4 text-white">Liên Hệ</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-yellow-500 transition">Địa chỉ: Vĩnh Phúc, Việt Nam</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition">Email: contact@xmenfashion.com</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition">Hotline: 0987-000-001</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container mt-8 border-t border-gray-700 pt-6 text-center">
+            <p>&copy; 2025 X-MEN FASHION. .</p>
+        </div>
+    </footer>
+</body>
+</html>
